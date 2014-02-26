@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+	<head>
+	</head>
+	<body>
+		<img id="img" src="http://imgs.xkcd.com/comics/now/00h00m.png">
+		<script>
+			interval = 500;
+			(function() {
+				var format = function format(num) {
+					if (num < 10) {
+						return '0' + num;
+					} else {
+						return num.toString();
+					}
+				}
+				var imgSrc = function imgSrc(hour, minute) {
+					return 'http://imgs.xkcd.com/comics/now/' + format(hour) + 'h' + format(minute) + 'm.png'
+				}
+				var hour = 0;
+				var minute = 0;
+				setInterval(function() {
+					minute = (minute + 15)%60;
+					if (minute === 0) {
+						hour = (hour + 1)%24;
+					}
+					document.getElementById('img').src = imgSrc(hour, minute);
+				}, interval);
+			})();
+		</script>
+	</body>
+</html>
